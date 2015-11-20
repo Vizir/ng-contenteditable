@@ -1,0 +1,24 @@
+{
+  "name": "content-editable",
+  "version": "0.0.1",
+  "authors": [
+    "Fabrício Ferrari de Campos <fabricio@vizir.com.br>"
+  ],
+  "description": "Use ngModel and validations with contenteditable HTML5 attribute",
+  "main": "./dist/content-editable.js",
+  "keywords": [
+    "angular",
+    "AngularJS",
+    "contenteditable",
+    "content-editable"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "> 1.2.0 < 2.0"
+  },
+  "devDependencies": {}
+}
