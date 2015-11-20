@@ -1,11 +1,11 @@
 {
-  "name": "content-editable",
+  "name": "ng-content-editable",
   "version": "0.0.1",
   "authors": [
     "Fabrício Ferrari de Campos <fabricio@vizir.com.br>"
   ],
   "description": "Use ngModel and validations with contenteditable HTML5 attribute",
-  "main": "./dist/content-editable.js",
+  "main": "./dist/ng-content-editable.js",
   "keywords": [
     "angular",
     "AngularJS",

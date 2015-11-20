@@ -1,5 +1,5 @@
 {
-  "name": "content-editable",
+  "name": "ng-content-editable",
   "version": "0.0.1",
   "description": "Use ngModel and validations with contenteditable HTML5 attribute",
   "scripts": {
