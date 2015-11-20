@@ -3,4 +3,4 @@
 *.swp
 *.orig
 npm-debug.log
-/node-modules
+node_modules/

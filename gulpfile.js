@@ -14,10 +14,10 @@ gulp.task('lint', function() {
 gulp.task('compile', function() {
   return gulp.src('src/**/*.js')
     .pipe(ngAnnotate())
-    .pipe(concat('content-editable.js'))
+    .pipe(concat('ng-content-editable.js'))
     .pipe(gulp.dest('dist'))
     .pipe(uglify())
-    .pipe(rename('content-editable.min.js'))
+    .pipe(rename('ng-content-editable.min.js'))
     .pipe(gulp.dest('dist'));
 });
 
