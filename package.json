@@ -1,6 +1,6 @@
 {
   "name": "ng-content-editable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use ngModel and validations with contenteditable HTML5 attribute",
   "scripts": {
     "test": "echo \"Pending tests implementation\" && exit 1"
