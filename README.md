@@ -1,4 +1,4 @@
-# content-editable
+# ng-content-editable
 
 ### Getting Started
 Download the package, and include the dist/content-editable.min.js file in your page.
@@ -41,3 +41,8 @@ var app = angular.module('app', ["content-editable"]);
 | ng-minlength | The min-length for the attribute | 3|
 | only-text | Remove all the html tags for the attribute value | true or false|
 | convert-new-lines | Convert all `<br>` and `<div>` to `\r\n` | true or false|
+
+
+### Demo
+
+Visit [vizir.github.io/ng-contenteditable](http://vizir.github.io/ng-contenteditable/)
