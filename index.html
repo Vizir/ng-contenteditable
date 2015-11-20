@@ -14,9 +14,11 @@
         <span class="input input--hoshi">
           <div
             contenteditable
-            ng-model="model"
+            ng-model="model.message"
             class="input__field input__field--hoshi"
             type="text"
+            ng-maxlength=1000
+            ng-minlength=3
           />
           </div>
           <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">

@@ -10,11 +10,12 @@
         require: ['^?ngModel', '^?form'],
         link: function(scope, element, attrs, args) {
           var form, ngModel, read, validate;
+          // get the modelKey to update form field validity
+          var split = attrs.ngModel.split('.');
+          var modelKey = split[split.length - 1];
 
           ngModel = args[0];
-
           form = args[1];
-
           // when model has already a value
           $timeout(function() {
             return element.html(ngModel.$modelValue);
@@ -31,11 +32,11 @@
           validate = function(html) {
             var length = html.length;
             if (length > attrs.ngMaxlength || length < attrs.ngMinlength) {
-              form.message.$setValidity('message', false);
+              ngModel.$setValidity(modelKey, false);
               return element.addClass('-error');
             }
             if (element.hasClass('-error')) {
-              form.message.$setValidity('message', true);
+              ngModel.$setValidity(modelKey, true);
               return element.removeClass('-error');
             }
           };
