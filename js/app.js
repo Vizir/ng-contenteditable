@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  var demoApp = angular.module("demo", [])
+  var demoApp = angular.module('demo', [])
     .directive('contenteditable', function($timeout) {
       return {
         restrict: 'A',
@@ -58,10 +58,10 @@
           function parseHtml(html) {
             html = html.replace(/&nbsp;/g, ' ');
             if (opts.convertNewLines) {
-              html = html.replace(/<br(\s*)\/*>/ig, "\r\n"); // replace br for newlines
-              html = html.replace(/<[div>]+>/ig, "\r\n"); // replace div for newlines
-              html = html.replace(/<\/[div>]+>/gm, "") ; // remove remaning divs
-              html = html.replace(/\r\n$/, ""); // remove last newline
+              html = html.replace(/<br(\s*)\/*>/ig, '\r\n'); // replace br for newlines
+              html = html.replace(/<[div>]+>/ig, '\r\n'); // replace div for newlines
+              html = html.replace(/<\/[div>]+>/gm, '') ; // remove remaining divs
+              html = html.replace(/\r\n$/, ''); // remove last newline
             }
 
             if (opts.onlyText) {
