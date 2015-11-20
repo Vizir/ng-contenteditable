@@ -10,15 +10,17 @@
   <body>
     <div class="container">
       <section class="content">
-        <h2>{{model}}</h2>
+        <h2><pre>{{model}}</pre></h2>
         <span class="input input--hoshi">
           <div
             contenteditable
-            ng-model="model.message"
+            ng-model="model"
             class="input__field input__field--hoshi"
             type="text"
             ng-maxlength=1000
             ng-minlength=3
+            only-text="true"
+            convert-new-lines="true"
           />
           </div>
           <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
