@@ -1,7 +1,7 @@
 # ng-content-editable
 
 ### Getting Started
-Download the package, and include the dist/content-editable.min.js file in your page.
+Download the package, and include the dist/ng-content-editable.min.js file in your page.
 
 Via bower
 
