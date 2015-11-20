@@ -1,0 +1,33 @@
+{
+  "name": "content-editable",
+  "version": "0.0.1",
+  "description": "Use ngModel and validations with contenteditable HTML5 attribute",
+  "scripts": {
+    "install": "gulp",
+    "test": "echo \"Pending tests implementation\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vizir/ng-contenteditable.git"
+  },
+  "keywords": [
+    "angular",
+    "AngularJS",
+    "contenteditable",
+    "content-editable"
+  ],
+  "author": "Fabrício Ferrari de Campos <fabricio@vizir.com.br>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vizir/ng-contenteditable/issues"
+  },
+  "homepage": "https://github.com/Vizir/ng-contenteditable",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-uglify": "latest",
+    "gulp-rename": "latest",
+    "gulp-concat": "latest",
+    "gulp-jshint": "latest",
+    "gulp-ng-annotate": "latest"
+  }
+}
