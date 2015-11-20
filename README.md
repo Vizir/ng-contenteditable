@@ -6,13 +6,13 @@ Download the package, and include the dist/content-editable.min.js file in your 
 Via bower
 
 ```bash
-bower install angucomplete-alt --save
+bower install content-editable --save
 ```
 
 Or via npm
 
 ```bash
-npm install angucomplete-alt --save
+npm install content-editable --save
 ```
 
 Then add the content-editable module to your Angular App file, e.g.
