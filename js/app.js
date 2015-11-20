@@ -16,6 +16,14 @@
 
           ngModel = args[0];
           form = args[1];
+
+          // options
+          var opts = {};
+          angular.forEach(['onlyText', 'convertNewLines'], function(opt) {
+            var o = attrs[opt];
+            opts[opt] = o && o !== 'false';
+          });
+
           // when model has already a value
           $timeout(function() {
             return element.html(ngModel.$modelValue);
@@ -24,7 +32,7 @@
           read = function() {
             var html;
             html = element.html();
-            html = html.replace(/&nbsp;/g, ' ');
+            html = parseHtml(html);
             ngModel.$setViewValue(html);
             validate(html);
           };
@@ -46,6 +54,22 @@
           });
 
           return;
+
+          function parseHtml(html) {
+            html = html.replace(/&nbsp;/g, ' ');
+            if (opts.convertNewLines) {
+              html = html.replace(/<br(\s*)\/*>/ig, "\r\n"); // replace br for newlines
+              html = html.replace(/<[div>]+>/ig, "\r\n"); // replace div for newlines
+              html = html.replace(/<\/[div>]+>/gm, "") ; // remove remaning divs
+              html = html.replace(/\r\n$/, ""); // remove last newline
+            }
+
+            if (opts.onlyText) {
+              html = html.replace(/<\S[^><]*>/g, '');
+            }
+
+            return html;
+          }
         }
       };
     });
