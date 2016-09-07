@@ -44,6 +44,10 @@ angular.module('content-editable', [])
         }
       };
 
+      ngModel.$render = function() {
+        element.html(ngModel.$viewValue || "");
+      };
+      
       element.bind('blur keyup change', function() {
         scope.$apply(read);
       });
