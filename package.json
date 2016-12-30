@@ -24,11 +24,12 @@
   "main": "dist/ng-content-editable.min.js",
   "devDependencies": {
     "gulp": "latest",
-    "gulp-uglify": "latest",
-    "gulp-rename": "latest",
     "gulp-concat": "latest",
-    "gulp-jshint": "latest",
-    "gulp-ng-annotate": "latest"
+    "gulp-jshint": "^2.0.4",
+    "gulp-ng-annotate": "latest",
+    "gulp-rename": "latest",
+    "gulp-uglify": "latest",
+    "jshint": "^2.9.4"
   },
   "dependencies": {}
 }
