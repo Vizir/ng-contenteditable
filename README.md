@@ -46,3 +46,33 @@ var app = angular.module('app', ["content-editable"]);
 ### Demo
 
 Visit [vizir.github.io/ng-contenteditable](http://vizir.github.io/ng-contenteditable/)
+
+### Contributing
+
+It's easy for you to make a contribution, just open a PR on GitHub :)
+
+But if this will be your first contribution to a JavaScript project, below are some steps that are useful during development.
+
+Install the dev dependencies:
+
+```bash
+npm install
+```
+
+Run linter:
+
+```bash
+npm run lint
+```
+
+Generate the dist files:
+
+```bash
+npm run compile
+```
+
+Regerate the dist files while coding:
+
+```bash
+npm run watch
+```
