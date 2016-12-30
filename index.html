@@ -1,0 +1,105 @@
+<!doctype html>
+<html ng-app="demo">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./gh-pages/css/demo.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="./dist/ng-content-editable.min.js"></script>
+    <script src="./gh-pages/app.js"></script>
+    <title>ng-contenteditable</title>
+  </head>
+  <body ng-controller="Ctrl">
+    <div class="container">
+      <section class="content">
+        <h2>Example 1: HTML5 validations</h2>
+        <p class="explanation">
+          You can use <strong>ng-maxlength</strong> and <strong>ng-minlength</strong> to build validations, for example:
+          <br>
+          ng-maxlength = 1000 <span>|</span> ng-minlength = 3
+          <br>
+          <i>Notice that `-error` class is added in the contenteditable element for you handle it.</i>
+        </p>
+        <span class="input input--hoshi">
+          <div
+            contenteditable
+            class="input__field input__field--hoshi"
+            ng-model="model.example1"
+            ng-maxlength=1000
+            ng-minlength=3
+          /></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </span>
+        <pre>{{model.example1}}</pre>
+      </section>
+
+      <hr>
+
+      <section class="content">
+        <h2>Example 2: without any optional attributes</h2>
+        <p class="explanation">
+          This time the `contenteditable` will work as expected, adding html code when you breakline for example.
+        </p>
+        <span class="input input--hoshi">
+          <div
+            contenteditable
+            class="input__field input__field--hoshi"
+            ng-model="model.example2"
+          /></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </span>
+        <pre>{{model.example2}}</pre>
+      </section>
+
+      <hr>
+
+      <section class="content">
+        <h2>Example 3: remove HTML tags</h2>
+        <p class="explanation">
+          You can use the <strong>only-text</strong> attribute to make the html tags inside the contenteditable disappear.
+          <br>
+          <i>Notice even breakline will be not possible to be added.</i>
+        </p>
+        <span class="input input--hoshi">
+          <div
+            contenteditable
+            class="input__field input__field--hoshi"
+            ng-model="model.example3"
+            only-text="true"
+          /></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </span>
+        <pre>{{model.example3}}</pre>
+      </section>
+
+      <hr>
+
+      <section class="content">
+        <h2>Example 4: turn breaklines in `/r/n`</h2>
+        <p class="explanation">
+          In case you need to save in your store (ex: database), with the traditionals specials characters `/r/n`, just use the <strong>convert-new-lines</strong> attribute.
+          <br>
+          Notice `ng-content-editable` will replace the `divs` and `brs` with `/r/n`.
+        </p>
+        <span class="input input--hoshi">
+          <div
+            contenteditable
+            class="input__field input__field--hoshi"
+            ng-model="model.example4"
+            only-text="true"
+            convert-new-lines="true"
+          /></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </span>
+        <pre>{{model.example4}}</pre>
+      </section>
+    </div>
+  </body>
+</html>
