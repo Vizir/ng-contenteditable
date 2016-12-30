@@ -12,7 +12,7 @@
         var ngModel;
         var read;
         var validate;
-        var modelKey = getModelKey;
+        var modelKey = getModelKey();
 
         ngModel = args[0];
         form = args[1];
