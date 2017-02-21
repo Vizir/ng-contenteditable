@@ -33,7 +33,6 @@
           var html;
           html = element.html();
           html = parseHtml(html);
-          element.html(html);
           ngModel.$setViewValue(html);
           validate(html);
         };
