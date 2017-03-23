@@ -15,6 +15,11 @@
         var modelKey = getModelKey();
 
         ngModel = args[0];
+
+        if (ngModel === null) {
+          return null;
+        }
+
         form = args[1];
 
         // options
