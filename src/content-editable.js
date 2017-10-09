@@ -24,7 +24,7 @@
 
                     // options
                     var opts = {};
-                    angular.forEach(['onlyText', 'convertNewLines'], function (opt) {
+                    angular.forEach(['onlyText', 'convertNewLines', 'noLf', 'onlyNum'], function (opt) {
                         var o = attrs[opt];
                         opts[opt] = o && o !== 'false';
                     });
@@ -35,17 +35,23 @@
                     });
 
                     read = function () {
-                        var html;
-                        html = element.html();
-                        if (html) {
-                            html = parseHtml(html);
+                        var content;
+                        if ((opts.onlyText && opts.noLf) || opts.onlyNum) {
+                            content = element.text();
+
+                        } else {
+                            content = element.html();
+                            if (content) {
+                                content = parseHtml(content);
+                            }
                         }
-                        ngModel.$setViewValue(html);
-                        validate(html);
+
+                        ngModel.$setViewValue(content);
+                        validate(content);
                     };
 
-                    validate = function (html) {
-                        var length = html.length;
+                    validate = function (content) {
+                        var length = content.length;
 
                         if (length > attrs.ngMaxlength || length < attrs.ngMinlength) {
                             ngModel.$setValidity(modelKey, false);
@@ -66,6 +72,25 @@
                         scope.$apply(read);
                     });
 
+                    element.bind('keydown', function (e) {
+                        var cntrlKeys = [8, 37, 38, 39, 40, 46];
+                        // comma, dot, 0-9
+                        if(opts.onlyNum && cntrlKeys.indexOf(e.which) === -1 && e.which !== 188 && e.which !== 190 && !((e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105))) {
+                            e.preventDefault();
+                            return false;
+                        }
+                        if (opts.noLf) {
+                            if (e.which === 13) {
+                                e.preventDefault();
+                                return false;
+                            } else if (attrs.ngMaxlength && element.text().length >= attrs.ngMaxlength && cntrlKeys.indexOf(e.which) === -1) {
+                                // !e.shiftKey && !e.altKey && !e.ctrlKey &&
+                                e.preventDefault();
+                                return false;
+                            }
+                        }
+                    });
+
                     return;
 
                     function getModelKey() {
@@ -81,11 +106,16 @@
                     function parseHtml(html) {
                         html = html.replace(/&nbsp;/g, ' ');
 
-                        if (opts.convertNewLines) {
-                            html = html.replace(/<br(\s*)\/*>/ig, '\r\n'); // replace br for newlines
-                            html = html.replace(/<[div>]+>/ig, '\r\n'); // replace div for newlines
+                        if (opts.convertNewLines || opts.noLf) {
+                            if (opts.noLf) {
+                                var lf = ' ', rxl = / $/;
+                            } else {
+                                var lf = '\r\n', rxl = /\r\n$/;
+                            }
+                            html = html.replace(/<br(\s*)\/*>/ig, lf); // replace br for newlines
+                            html = html.replace(/<[div>]+>/ig, lf); // replace div for newlines
                             html = html.replace(/<\/[div>]+>/gm, ''); // remove remaining divs
-                            html = html.replace(/\r\n$/, ''); // remove last newline
+                            html = html.replace(rxl, ''); // remove last newline
                         }
 
                         if (opts.onlyText) {
