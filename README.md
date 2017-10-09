@@ -24,28 +24,29 @@ var app = angular.module('app', ["content-editable"]);
 ### Usage
 
 ```html
-<div
-  contenteditable
-  ng-model="model"
-  ng-maxlength=255
-  ng-minlength=3
-  only-text="true"
-  convert-new-lines="true"
-/></div>
+<div contenteditable
+     ng-model="model"
+     ng-maxlength=255
+     ng-minlength=3
+     only-text="true"
+     convert-new-lines="true"
+></div>
 ```
 
 ### Description of optional attributes
-| Attribute | Description| Example  |
-| :------------- |:-------------|  :-----|
-| ng-maxlength | The max-length for the attribute | 255|
-| ng-minlength | The min-length for the attribute | 3|
-| only-text | Remove all the html tags for the attribute value | true or false|
-| convert-new-lines | Convert all `<br>` and `<div>` to `\r\n` | true or false|
+| Attribute | Description| Example |
+| :------------- | :-------------| :----- |
+| ng-maxlength | The max-length for the attribute | 255 |
+| ng-minlength | The min-length for the attribute | 3 |
+| only-text | Remove all the html tags for the attribute value | true or false |
+| convert-new-lines | Convert all `<br>` and `<div>` to `\r\n` | true or false |
+| only-num | Allow numbers 0-9, `.` and `,` only | true or false |
+| no-lf | Line breaks not allowed, results in single line | true or false |
 
 
 ### Demo
 
-Visit [vizir.github.io/ng-contenteditable](http://vizir.github.io/ng-contenteditable/)
+Visit [slackero.github.io/ng-contenteditable](http://slackero.github.io/ng-contenteditable/)
 
 ### Contributing
 
