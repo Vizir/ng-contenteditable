@@ -35,5 +35,8 @@
     "jshint": "^2.9.4",
     "gulp-jscs": "^4.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "graceful-fs": "^4.1.11",
+    "minimatch": "^3.0.4"
+  }
 }
