@@ -18,7 +18,11 @@
     "contenteditable",
     "content-editable"
   ],
-  "author": "Oliver Georgi <slackero+github@gmail.com>",
+  "author": "Fabrício Ferrari de Campos <fabricio@vizir.com.br>",
+  "contributors": [
+    "Oliver Georgi <slackero+github@gmail.com> (https://github.com/slackero/ng-contenteditable)",
+    "Letov Nikita <mail@nikitian.ru> (https://github.com/Nikitian/ng-contenteditable)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/slackero/ng-contenteditable/issues"
