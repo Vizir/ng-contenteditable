@@ -44,10 +44,6 @@ var app = angular.module('app', ["content-editable"]);
 | no-lf | Line breaks not allowed, results in single line | true or false |
 
 
-### Demo
-
-Visit [slackero.github.io/ng-contenteditable](http://slackero.github.io/ng-contenteditable/)
-
 ### Contributing
 
 It's easy for you to make a contribution, just open a PR on GitHub :)
