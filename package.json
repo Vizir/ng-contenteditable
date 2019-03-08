@@ -1,6 +1,6 @@
 {
   "name": "ng-content-editable",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Use ngModel and validations with contenteditable HTML5 attribute",
   "scripts": {
     "test": "echo \"Pending tests implementation\" && exit 1",
@@ -28,9 +28,6 @@
   "homepage": "https://github.com/slackero/ng-contenteditable",
   "main": "dist/ng-content-editable.min.js",
   "devDependencies": {
-    "eslint": "^5.15.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0",
     "uglify-js": "~3.4.9"
   },
   "dependencies": {}

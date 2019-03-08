@@ -8,22 +8,30 @@
                 restrict: 'A',
                 require: ['^?ngModel', '^?form'],
                 link: function (scope, element, attrs, args) {
-                    var ngModel = args[0],
-                        modelKey = getModelKey();
+                    var ngModel = args[0];
 
                     if (ngModel === null) {
                         return null;
                     }
 
-                    // options
-                    var opts = {};
-                    angular.forEach(['onlyText', 'convertNewLines', 'noLf', 'onlyNum'], function (opt) {
-                        opts[opt] = attrs[opt] && attrs[opt] !== 'false';
+                    var modelKey = getModelKey(),
+                        opts = {
+                            onlyText: false,
+                            convertNewLines: false,
+                            noLf: false,
+                            onlyNum: false,
+                            noTrim: false
+                        };
+
+                    angular.forEach(['onlyText', 'convertNewLines', 'noLf', 'onlyNum', 'noTrim'], function (opt) {
+                        if (attrs.hasOwnProperty(opt) && attrs[opt] && attrs[opt] !== 'false') {
+                            opts[opt] = true;
+                        }
                     });
 
                     // when model has already a value
                     $timeout(function () {
-                        return element.html(ngModel.$modelValue);
+                        return (opts.onlyText && opts.noLf) || opts.onlyNum ? element.text(ngModel.$modelValue) : element.html(ngModel.$modelValue);
                     });
 
                     var validate = function (content) {
@@ -41,11 +49,9 @@
                     };
 
                     var read = function () {
-                        var content;
+                        var content = '';
                         if ((opts.onlyText && opts.noLf) || opts.onlyNum) {
-
                             content = element.text();
-
                         } else {
                             content = element.html();
                             if (content) {
@@ -53,16 +59,28 @@
                             }
                         }
 
+                        if (opts.noTrim === false && content !== '') {
+                            content = content.replace(/&nbsp;/g, ' ');
+                            content = content.trim();
+                        }
+
                         ngModel.$setViewValue(content);
                         validate(content);
                     };
 
                     ngModel.$render = function () {
-                        element.html(ngModel.$viewValue || '');
+                        if ((opts.onlyText && opts.noLf) || opts.onlyNum) {
+                            element.text(ngModel.$viewValue || '');
+                        } else {
+                            element.html(ngModel.$viewValue || '');
+                        }
                     };
 
-                    element.bind('blur keyup change', function () {
+                    element.bind('blur keyup change', function (event) {
                         scope.$apply(read);
+                        if (event.type === 'blur') {
+                            scope.$apply(ngModel.$render);
+                        }
                     });
 
                     element.bind('keydown', function (e) {
