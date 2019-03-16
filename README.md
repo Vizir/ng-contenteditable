@@ -3,13 +3,13 @@
 This is a slightly extended fork of the npm package [ng-content-editable](https://www.npmjs.com/package/ng-content-editable).
 
 ### Demo
-You can tryout **ng-content-editable** [here](https://slackero.github.io/ng-contenteditable/).
+You can tryout **ng-content-editable** [here](https://vizir.github.io/ng-contenteditable/).
 
 ### Getting Started
 Download the package, and include the `dist/ng-content-editable.min.js` file in your page.
 
 ```bash
-npm install @slackero/ng-content-editable --save
+npm install ng-content-editable --save
 ```
 
 Then add the content-editable module to your Angular App file, e.g.

@@ -1,6 +1,6 @@
 {
-  "name": "@slackero/ng-content-editable",
-  "version": "1.1.2",
+  "name": "ng-content-editable",
+  "version": "1.0.0",
   "description": "Use ngModel and validations with contenteditable HTML5 attribute",
   "scripts": {
     "test": "echo \"Pending tests implementation\" && exit 1",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/slackero/ng-contenteditable.git"
+    "url": "https://github.com/Vizir/ng-contenteditable.git"
   },
   "keywords": [
     "angular",
@@ -16,16 +16,16 @@
     "contenteditable",
     "content-editable"
   ],
-  "author": "Oliver Georgi <slackero+github@gmail.com>",
+  "author": "Fabrício Ferrari de Campos <fabricio@vizir.com.br> (https://github.com/Vizir/ng-contenteditable)",
   "contributors": [
-    "Fabrício Ferrari de Campos <fabricio@vizir.com.br> (https://github.com/Vizir/ng-contenteditable)",
+    "Oliver Georgi <slackero+github@gmail.com>",
     "Letov Nikita <mail@nikitian.ru> (https://github.com/Nikitian/ng-contenteditable)"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/slackero/ng-contenteditable/issues"
+    "url": "https://github.com/Vizir/ng-contenteditable/issues"
   },
-  "homepage": "https://github.com/slackero/ng-contenteditable",
+  "homepage": "https://github.com/Vizir/ng-contenteditable",
   "main": "dist/ng-content-editable.min.js",
   "devDependencies": {
     "uglify-js": "~3.4.9"
