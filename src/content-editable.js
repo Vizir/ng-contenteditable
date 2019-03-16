@@ -1,89 +1,144 @@
 (function () {
 
-  'use strict';
+    'use strict';
 
-  angular.module('content-editable', [])
-  .directive('contenteditable', function ($timeout) {
-    return {
-      restrict: 'A',
-      require: ['^?ngModel', '^?form'],
-      link: function (scope, element, attrs, args) {
-        var form;
-        var ngModel;
-        var read;
-        var validate;
-        var modelKey = getModelKey();
+    angular.module('content-editable', [])
+        .directive('contenteditable', ['$timeout', function ($timeout) {
+            return {
+                restrict: 'A',
+                require: ['^?ngModel', '^?form'],
+                link: function (scope, element, attrs, args) {
+                    var ngModel = args[0];
 
-        ngModel = args[0];
-        form = args[1];
+                    if (ngModel === null) {
+                        return null;
+                    }
 
-        // options
-        var opts = {};
-        angular.forEach(['onlyText', 'convertNewLines'], function (opt) {
-          var o = attrs[opt];
-          opts[opt] = o && o !== 'false';
-        });
+                    var modelKey = getModelKey(),
+                        opts = {
+                            onlyText: false,
+                            convertNewLines: false,
+                            noLf: false,
+                            onlyNum: false,
+                            noTrim: false
+                        };
 
-        // when model has already a value
-        $timeout(function () {
-          return element.html(ngModel.$modelValue);
-        });
+                    angular.forEach(['onlyText', 'convertNewLines', 'noLf', 'onlyNum', 'noTrim'], function (opt) {
+                        if (attrs.hasOwnProperty(opt) && attrs[opt] && attrs[opt] !== 'false') {
+                            opts[opt] = true;
+                        }
+                    });
 
-        read = function () {
-          var html;
-          html = element.html();
-          html = parseHtml(html);
-          ngModel.$setViewValue(html);
-          validate(html);
-        };
+                    // when model has already a value
+                    $timeout(function () {
+                        return (opts.onlyText && opts.noLf) || opts.onlyNum ? element.text(ngModel.$modelValue) : element.html(ngModel.$modelValue);
+                    });
 
-        validate = function (html) {
-          var length = html.length;
+                    var validate = function (content) {
+                        var length = content.length;
 
-          if (length > attrs.ngMaxlength || length < attrs.ngMinlength) {
-            ngModel.$setValidity(modelKey, false);
-            return element.addClass('-error');
-          }
+                        if (length > attrs.ngMaxlength || length < attrs.ngMinlength) {
+                            ngModel.$setValidity(modelKey, false);
+                            return element.addClass('-error');
+                        }
 
-          if (element.hasClass('-error')) {
-            ngModel.$setValidity(modelKey, true);
-            return element.removeClass('-error');
-          }
-        };
+                        if (element.hasClass('-error')) {
+                            ngModel.$setValidity(modelKey, true);
+                            return element.removeClass('-error');
+                        }
+                    };
 
-        ngModel.$render = function () {
-          element.html(ngModel.$viewValue || '');
-        };
+                    var read = function () {
+                        var content = '';
+                        if ((opts.onlyText && opts.noLf) || opts.onlyNum) {
+                            content = element.text();
+                        } else {
+                            content = element.html();
+                            if (content) {
+                                content = parseHtml(content);
+                            }
+                        }
 
-        element.bind('blur keyup change', function () {
-          scope.$apply(read);
-        });
+                        if (opts.noTrim === false && content !== '') {
+                            content = content.replace(/&nbsp;/g, ' ');
+                            content = content.trim();
+                        }
 
-        return;
+                        ngModel.$setViewValue(content);
+                        validate(content);
+                    };
 
-        function getModelKey() {
-          var split = attrs.ngModel.split('.');
+                    ngModel.$render = function () {
+                        if ((opts.onlyText && opts.noLf) || opts.onlyNum) {
+                            element.text(ngModel.$viewValue || '');
+                        } else {
+                            element.html(ngModel.$viewValue || '');
+                        }
+                    };
 
-          return split[split.length - 1];
-        }
+                    element.bind('blur keyup change', function (event) {
+                        scope.$apply(read);
+                        if (event.type === 'blur') {
+                            scope.$apply(ngModel.$render);
+                        }
+                    });
 
-        function parseHtml(html) {
-          html = html.replace(/&nbsp;/g, ' ');
+                    element.bind('keydown', function (e) {
+                        var cntrlKeys = [8, 37, 38, 39, 40, 46];
+                        // comma, dot, 0-9
+                        if (opts.onlyNum && cntrlKeys.indexOf(e.which) === -1 && e.which !== 188 && e.which !== 190 && !((e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105))) {
+                            e.preventDefault();
+                            return false;
+                        }
+                        if (opts.noLf) {
+                            if (e.which === 13) {
+                                e.preventDefault();
+                                return false;
+                            } else if (attrs.ngMaxlength && element.text().length >= attrs.ngMaxlength && cntrlKeys.indexOf(e.which) === -1) {
+                                // !e.shiftKey && !e.altKey && !e.ctrlKey &&
+                                e.preventDefault();
+                                return false;
+                            }
+                        }
+                    });
 
-          if (opts.convertNewLines) {
-            html = html.replace(/<br(\s*)\/*>/ig, '\r\n'); // replace br for newlines
-            html = html.replace(/<[div>]+>/ig, '\r\n'); // replace div for newlines
-            html = html.replace(/<\/[div>]+>/gm, ''); // remove remaining divs
-            html = html.replace(/\r\n$/, ''); // remove last newline
-          }
+                    function getModelKey() {
+                        if (typeof attrs.ngModel === 'undefined') {
+                            return null;
+                        }
 
-          if (opts.onlyText) {
-            html = html.replace(/<\S[^><]*>/g, '');
-          }
+                        var split = attrs.ngModel.split('.');
 
-          return html;
-        }
-      },
-    };
-  });
+                        return split[split.length - 1];
+                    }
+
+                    function parseHtml(html) {
+                        html = html.replace(/&nbsp;/g, ' ');
+
+                        if (opts.convertNewLines || opts.noLf) {
+                            var lf = '\r\n',
+                                rxl = /\r\n$/;
+
+                            if (opts.noLf) {
+                                lf = ' ';
+                                rxl = / $/;
+                            }
+
+                            html = html.replace(/<br(\s*)\/*>/ig, lf); // replace br for newlines
+                            html = html.replace(/<[div>]+>/ig, lf); // replace div for newlines
+                            html = html.replace(/<\/[div>]+>/gm, ''); // remove remaining divs
+                            html = html.replace(/<[p>]+>/ig, lf); // replace p for newlines
+                            html = html.replace(/<\/[p>]+>/gm, ''); // remove remaining p
+                            html = html.replace(rxl, ''); // remove last newline
+                        }
+
+                        if (opts.onlyText) {
+                            html = html.replace(/<\S[^><]*>/g, '');
+                        }
+
+                        return html;
+                    }
+                }
+            };
+        }]);
 })();

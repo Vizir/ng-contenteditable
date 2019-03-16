@@ -1,16 +1,14 @@
 {
-  "name": "ng-content-editable",
-  "version": "0.0.4",
+  "name": "@slackero/ng-content-editable",
+  "version": "1.1.2",
   "description": "Use ngModel and validations with contenteditable HTML5 attribute",
   "scripts": {
     "test": "echo \"Pending tests implementation\" && exit 1",
-    "lint": "gulp lint",
-    "compile": "gulp compile",
-    "watch": "gulp watch"
+    "build": "\\cp src/content-editable.js dist/ng-content-editable.js && uglifyjs dist/ng-content-editable.js -o dist/ng-content-editable.min.js -c -m"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Vizir/ng-contenteditable.git"
+    "url": "https://github.com/slackero/ng-contenteditable.git"
   },
   "keywords": [
     "angular",
@@ -18,22 +16,19 @@
     "contenteditable",
     "content-editable"
   ],
-  "author": "Fabrício Ferrari de Campos <fabricio@vizir.com.br>",
+  "author": "Oliver Georgi <slackero+github@gmail.com>",
+  "contributors": [
+    "Fabrício Ferrari de Campos <fabricio@vizir.com.br> (https://github.com/Vizir/ng-contenteditable)",
+    "Letov Nikita <mail@nikitian.ru> (https://github.com/Nikitian/ng-contenteditable)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Vizir/ng-contenteditable/issues"
+    "url": "https://github.com/slackero/ng-contenteditable/issues"
   },
-  "homepage": "https://github.com/Vizir/ng-contenteditable",
+  "homepage": "https://github.com/slackero/ng-contenteditable",
   "main": "dist/ng-content-editable.min.js",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-jshint": "^2.0.4",
-    "gulp-ng-annotate": "^2.0.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-uglify": "^2.0.0",
-    "jshint": "^2.9.4",
-    "gulp-jscs": "^4.0.0"
+    "uglify-js": "~3.4.9"
   },
   "dependencies": {}
 }
