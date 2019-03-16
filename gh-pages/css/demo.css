@@ -175,3 +175,7 @@ hr {
 [contenteditable] {
 	margin-top: 50px;
 }
+
+.keep-lf {
+    white-space: pre-wrap;
+}

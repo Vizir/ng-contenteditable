@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="./gh-pages/css/demo.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
     <script src="./dist/ng-content-editable.min.js"></script>
     <script src="./gh-pages/app.js"></script>
     <title>ng-contenteditable</title>
@@ -19,18 +19,19 @@
           <br>
           <i>Notice that `-error` class is added in the contenteditable element for you handle it.</i>
         </p>
-        <span class="input input--hoshi">
+        <div class="input input--hoshi">
           <div
-            contenteditable
+            contenteditable="true"
             class="input__field input__field--hoshi"
             ng-model="model.example1"
-            ng-maxlength=1000
-            ng-minlength=3
-          /></div>
-          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            ng-maxlength="1000"
+            ng-minlength="3"
+            id="input-1"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-1">
             <span class="input__label-content input__label-content--hoshi">Answer</span>
           </label>
-        </span>
+        </div>
         <pre>{{model.example1}}</pre>
       </section>
 
@@ -41,16 +42,17 @@
         <p class="explanation">
           This time the `contenteditable` will work as expected, adding html code when you breakline for example.
         </p>
-        <span class="input input--hoshi">
+        <div class="input input--hoshi">
           <div
             contenteditable
             class="input__field input__field--hoshi"
             ng-model="model.example2"
-          /></div>
-          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            id="input-2"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-2">
             <span class="input__label-content input__label-content--hoshi">Answer</span>
           </label>
-        </span>
+        </div>
         <pre>{{model.example2}}</pre>
       </section>
 
@@ -63,17 +65,18 @@
           <br>
           <i>Notice even breakline will be not possible to be added.</i>
         </p>
-        <span class="input input--hoshi">
+        <div class="input input--hoshi">
           <div
             contenteditable
             class="input__field input__field--hoshi"
             ng-model="model.example3"
             only-text="true"
-          /></div>
-          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
+            id="input-3"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-3">
             <span class="input__label-content input__label-content--hoshi">Answer</span>
           </label>
-        </span>
+        </div>
         <pre>{{model.example3}}</pre>
       </section>
 
@@ -84,21 +87,106 @@
         <p class="explanation">
           In case you need to save in your store (ex: database), with the traditionals specials characters `/r/n`, just use the <strong>convert-new-lines</strong> attribute.
           <br>
-          Notice `ng-content-editable` will replace the `divs` and `brs` with `/r/n`.
+          Notice `ng-content-editable` will replace `&lt;div&gt;`, `&lt;p&gt;` and `&lt;br&gt;` with `/r/n`.
         </p>
-        <span class="input input--hoshi">
+        <div class="input input--hoshi">
           <div
             contenteditable
-            class="input__field input__field--hoshi"
+            class="input__field input__field--hoshi keep-lf"
             ng-model="model.example4"
             only-text="true"
             convert-new-lines="true"
-          /></div>
+            id="input-4"
+          ></div>
           <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-4">
             <span class="input__label-content input__label-content--hoshi">Answer</span>
           </label>
-        </span>
+        </div>
         <pre>{{model.example4}}</pre>
+      </section>
+
+      <hr>
+
+      <section class="content">
+        <h2>Example 5: allow numbers only</h2>
+        <p class="explanation">
+          All numeric values only by using adding attribute <strong>only-num</strong>.
+        </p>
+        <div class="input input--hoshi">
+          <div
+            contenteditable
+            class="input__field input__field--hoshi"
+            ng-model="model.example5"
+            only-num="true"
+            id="input-5"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-5">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </div>
+        <pre>{{model.example5}}</pre>
+      </section>
+
+      <hr>
+
+      <section class="content">
+        <h2>Example 6: no linefeed</h2>
+        <p class="explanation">
+          The contenteditable element with attribute <strong>no-lf</strong> works like normal single input field. Entering line feeds will be ignored.
+        </p>
+        <div class="input input--hoshi">
+          <div
+                  contenteditable
+                  class="input__field input__field--hoshi"
+                  ng-model="model.example6"
+                  no-lf="true"
+                  id="input-6"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-6">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </div>
+        <pre>{{model.example6}}</pre>
+      </section>
+
+      <hr>
+
+      <section class="content">
+        <h2>Example 7: no trim</h2>
+        <p class="explanation">
+          Usually all leading or trainling whitespaces are trimmed from contenteditable input. To preserve leading and
+          trainling whitespaces add attribute <strong>no-trim</strong>. Try add whitespaces at begin or end of input.
+        </p>
+        <div class="input input--hoshi">
+          <div
+                  contenteditable
+                  class="input__field input__field--hoshi"
+                  ng-model="model.example7"
+                  no-trim="true"
+                  id="input-7"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-7">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </div>
+        <pre>{{model.example7 ? '[' + model.example7 + ']' : ''}}</pre>
+
+        <p class="explanation">
+          Just to test the default behaviour, try add whitespaces at begin or end of input.
+        </p>
+        <div class="input input--hoshi">
+          <div
+                  contenteditable
+                  class="input__field input__field--hoshi"
+                  ng-model="model.example8"
+                  no-trim="false"
+                  id="input-8"
+          ></div>
+          <label class="input__label input__label--hoshi input__label--hoshi-blue" for="input-8">
+            <span class="input__label-content input__label-content--hoshi">Answer</span>
+          </label>
+        </div>
+        <pre>{{model.example8 ? '[' + model.example8 + ']' : ''}}</pre>
       </section>
     </div>
   </body>
